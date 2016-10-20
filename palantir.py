@@ -3,6 +3,8 @@
 import SeleniumControl
 import time
 import random
+
+# Hope I don't get sued by J.R.R
 class Palantir:
     def __init__(self):
         self.s = SeleniumControl.SeleniumControl()
@@ -11,7 +13,7 @@ class Palantir:
     
         
         
-
+# This is entirely optional and you can skip this.
     def createSearchTerms(self,gamelist):
         searchTerms = []
         for x in gamelist:
@@ -27,17 +29,20 @@ class Palantir:
         return searchTerms
             
        
-       
+# This function gets all channel links from a search page.       
     def getChannelLinks(self):
         channellinks = self.s.driver.find_elements_by_class_name("g-hovercard")
         return channellinks
         
         
-    
+# Main function.
     def openSearch(self,searchterm):
+        # Initialize Selenium Driver.
         self.s.noProxy()
+        # Open youtube and search for keyword provided.
         self.s.openUrl("https://www.youtube.com/results?q=" + searchterm + "&sp=CAMSBAgFEAE%253D")
 
+        # Scrape links from first ten pages.
         for z in range(10):
             
             for x in self.getChannelLinks():
@@ -69,9 +74,16 @@ class Palantir:
             return True
         return False
             
-    
-gamelist = ["\"smart wallet\"", "\"unboxing gadgets\"", "\"unboxing wallet\"", "\"slim wallet\"", "\"ultimate slim wallet\"", "\"unboxing slim wallet\"", "\"unboxing smart wallet\"", "\"unboxing ultimate slim wallet\"", "\"wallet tracker\"", "\"wallet finder\""]
-#gamelist = ["indie games","dwarf fortress","adom","enter the gungeon","broforce"]
+
+# This is the most important part.
+# You have to list similar games here and keywords that
+# relevant. The better you do this, the better the results
+# will be. You can use google search semantics here so
+# if you want two words together enclose them in \" \"
+# Gosh I hope this is intelligible. 
+
+
+gamelist = ["\"indie games\"","\"dwarf fortress\"","adom","enter the gungeon","broforce"]
 
 #gamelist = gamelist + ["full throttle", "psychonauts 2","deponia", "botanicula"]
 #gamelist = gamelist + ["loom game", "the whispered world","flight of the amazon queen"]
